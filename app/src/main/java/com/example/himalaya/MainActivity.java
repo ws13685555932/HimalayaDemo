@@ -10,6 +10,7 @@ import android.os.Bundle;
 
 import com.example.himalaya.adapters.IndicatorAdapter;
 import com.example.himalaya.adapters.MainContentAdapter;
+import com.example.himalaya.utils.LogUtil;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -21,6 +22,7 @@ public class MainActivity extends FragmentActivity {
     private static final String TAG = "MainActivity";
     private MagicIndicator mMagicIndicator;
     private ViewPager mContentPager;
+    private IndicatorAdapter mIndicatorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
 
         initView();
+        initEvent();
 
 //        Map<String, String> map = new HashMap<String, String>();
 //        CommonRequest.getCategories(map, new IDataCallBack<CategoryList>() {
@@ -51,14 +54,26 @@ public class MainActivity extends FragmentActivity {
 
     }
 
+    private void initEvent() {
+        mIndicatorAdapter.setOnIndicatorTabClickListener(new IndicatorAdapter.OnIndicatorTapClickListener() {
+            @Override
+            public void onTabClick(int index) {
+                LogUtil.d(TAG, "click index is --->" + index);
+                if (mContentPager != null) {
+                    mContentPager.setCurrentItem(index);
+                }
+            }
+        });
+    }
+
     private void initView() {
         mMagicIndicator = findViewById(R.id.main_indicator);
         mMagicIndicator.setBackgroundColor(ContextCompat.getColor(this, R.color.main_color));
 
         // 创建indicator适配器
-        IndicatorAdapter adapter = new IndicatorAdapter(this);
+        mIndicatorAdapter = new IndicatorAdapter(this);
         CommonNavigator commonNavigator = new CommonNavigator(this);
-        commonNavigator.setAdapter(adapter);
+        commonNavigator.setAdapter(mIndicatorAdapter);
 
         // ViewPager
         mContentPager = findViewById(R.id.content_viewpager);
