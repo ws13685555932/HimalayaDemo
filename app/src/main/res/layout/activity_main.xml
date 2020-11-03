@@ -7,13 +7,41 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <net.lucode.hackware.magicindicator.MagicIndicator
-        android:id="@+id/main_indicator"
+    <LinearLayout
+        android:id="@+id/header"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="40dp"/>
+        android:layout_height="wrap_content">
+
+        <net.lucode.hackware.magicindicator.MagicIndicator
+            android:id="@+id/main_indicator"
+            android:layout_weight="4"
+            android:layout_width="0dp"
+            android:layout_height="40dp"/>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:background="@color/main_color"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_weight="1"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginRight="10dp"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/search_icon" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
 
     <androidx.viewpager.widget.ViewPager
-        android:layout_below="@id/main_indicator"
+        android:layout_below="@id/header"
         android:id="@+id/content_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

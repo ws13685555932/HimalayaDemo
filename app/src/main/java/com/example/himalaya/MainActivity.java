@@ -74,6 +74,7 @@ public class MainActivity extends FragmentActivity {
         mIndicatorAdapter = new IndicatorAdapter(this);
         CommonNavigator commonNavigator = new CommonNavigator(this);
         commonNavigator.setAdapter(mIndicatorAdapter);
+        commonNavigator.setAdjustMode(true);
 
         // ViewPager
         mContentPager = findViewById(R.id.content_viewpager);
