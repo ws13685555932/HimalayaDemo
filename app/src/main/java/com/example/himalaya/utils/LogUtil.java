@@ -14,7 +14,7 @@ public class LogUtil {
 
     public static void d(String TAG, String content) {
         if (sIsDebug) {
-            Log.d(sTAG, content);
+            Log.d(TAG, content);
         }
     }
 
