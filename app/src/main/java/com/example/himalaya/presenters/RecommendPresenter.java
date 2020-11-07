@@ -75,6 +75,7 @@ public class RecommendPresenter implements IRecommendPresenter {
                 if (mCallbacks != null) {
                     for (IRecommendViewCallback callback :
                             mCallbacks) {
+                        // 空数据的情况
                         callback.onEmptyData();
                     }
                 }
@@ -82,6 +83,7 @@ public class RecommendPresenter implements IRecommendPresenter {
                 if (mCallbacks != null) {
                     for (IRecommendViewCallback callback :
                             mCallbacks) {
+                        // 数据不为空的情况
                         callback.onRecommendListLoaded(albumList);
                     }
                 }
