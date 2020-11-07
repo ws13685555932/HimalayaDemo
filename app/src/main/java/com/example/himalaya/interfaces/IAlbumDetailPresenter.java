@@ -7,7 +7,7 @@ public interface IAlbumDetailPresenter {
     void loadMore();
 
     // 获取专辑详情
-    void getAlbumDetail(int albumId, int page);
+    void getAlbumDetail(long albumId, int page);
 
     void registerViewCallback(IAlbumDetailViewCallback callback);
 
