@@ -11,14 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.himalaya.R;
+import com.example.himalaya.utils.LogUtil;
 import com.ximalaya.ting.android.opensdk.model.album.Album;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecommendListAdapater extends RecyclerView.Adapter<RecommendListAdapater.InnerHolder> {
+public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdapter.InnerHolder> {
 
+    public static final String TAG = "RecommendListAdapter";
     private List<Album> mAlbumList = new ArrayList<>();
+    private OnRecommendItemClickListener mItemClickListener;
 
     @NonNull
     @Override
@@ -29,9 +32,19 @@ public class RecommendListAdapater extends RecyclerView.Adapter<RecommendListAda
     }
 
     @Override
-    public void onBindViewHolder(@NonNull InnerHolder holder, int position) {
+    public void onBindViewHolder(@NonNull InnerHolder holder, final int position) {
         // 设置数据
         holder.itemView.setTag(position);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mItemClickListener != null) {
+                    int clickPosition = (int) v.getTag();
+                    mItemClickListener.onItemClick(clickPosition, mAlbumList.get(position));
+                }
+                LogUtil.d(TAG, "holder itemView clicked --> " + v.getTag());
+            }
+        });
         holder.setData(mAlbumList.get(position));
     }
 
@@ -71,4 +84,13 @@ public class RecommendListAdapater extends RecyclerView.Adapter<RecommendListAda
             Glide.with(itemView.getContext()).load(album.getCoverUrlLarge()).into(ivAlbumCover);
         }
     }
+
+    public void setOnRecommendItemClickListener(OnRecommendItemClickListener listener) {
+        this.mItemClickListener = listener;
+    }
+
+    public interface OnRecommendItemClickListener {
+        void onItemClick(int position, Album album);
+    }
+
 }
