@@ -1,7 +1,10 @@
 package com.example.himalaya;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -9,8 +12,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.himalaya.interfaces.IAlbumDetailViewCallback;
 import com.example.himalaya.presenters.AlbumDetailPresenter;
+import com.example.himalaya.utils.ImageBlur;
 import com.example.himalaya.views.RoundRectImageView;
 import com.ximalaya.ting.android.opensdk.model.album.Album;
 import com.ximalaya.ting.android.opensdk.model.track.Track;
@@ -59,7 +65,18 @@ public class DetailActivity extends AppCompatActivity implements IAlbumDetailVie
 
         mTvAlbumTitle.setText(album.getAlbumTitle());
         mTvAlbumAuthor.setText(album.getAnnouncer().getNickname());
-        Glide.with(this).load(album.getCoverUrlLarge()).into(mIvLargeCover);
+        if (mIvLargeCover != null) {
+            Glide.with(this)
+                    .asBitmap()
+                    .load(album.getCoverUrlLarge())
+                    .into(new BitmapImageViewTarget(mIvLargeCover){
+                        @Override
+                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                            mIvLargeCover.setImageBitmap(resource);
+                            ImageBlur.makeBlur(mIvLargeCover, DetailActivity.this);
+                        }
+                    });
+        }
         Glide.with(this).load(album.getCoverUrlLarge()).into(mIvSmallCover);
     }
 }
