@@ -1,16 +1,19 @@
 package com.example.himalaya.base;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.Handler;
 
 import com.example.himalaya.utils.LogUtil;
 import com.ximalaya.ting.android.opensdk.constants.DTransferConstants;
 import com.ximalaya.ting.android.opensdk.datatrasfer.CommonRequest;
+import com.ximalaya.ting.android.opensdk.player.XmPlayerManager;
 
 
 public class BaseApplication extends Application {
 
     private static Handler sHandler = null;
+    private static Context sContext = null;
 
     @Override
     public void onCreate() {
@@ -30,10 +33,17 @@ public class BaseApplication extends Application {
             mXimalaya.init(this ,mAppSecret);
         }
 
+        // 初始化播放器
+        XmPlayerManager.getInstance(this).init();
+
         LogUtil.init(this.getPackageName(), true);
 
         sHandler = new Handler();
+        sContext = getBaseContext();
+    }
 
+    public static Context getContext() {
+        return sContext;
     }
 
     public static Handler getHandler() {

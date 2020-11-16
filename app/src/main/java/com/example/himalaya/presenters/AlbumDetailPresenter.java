@@ -63,20 +63,29 @@ public class AlbumDetailPresenter implements IAlbumDetailPresenter {
                 LogUtil.d(TAG, "");
                 if (trackList != null) {
                     List<Track> tracks = trackList.getTracks();
-                    handleAblumDetailResult(tracks);
+                    handleAlbumDetailResult(tracks);
                     LogUtil.d(TAG, "track size --> " + tracks.size());
                 }
             }
 
             @Override
             public void onError(int i, String s) {
+                handleError(i, s);
                 LogUtil.d(TAG, "error message -->" + s);
             }
         });
     }
 
-    private void handleAblumDetailResult(List<Track> tracks) {
+    private void handleError(int errorCode , String errorMessage) {
         for (IAlbumDetailViewCallback callback : mCallbacks) {
+            callback.onNetworkError(errorCode, errorMessage);
+        }
+
+    }
+
+    private void handleAlbumDetailResult(List<Track> tracks) {
+        for (IAlbumDetailViewCallback callback : mCallbacks) {
+            LogUtil.d(TAG, "handleAlbumDetailResult");
             callback.onDetailListLoaded(tracks);
         }
     }
@@ -92,7 +101,7 @@ public class AlbumDetailPresenter implements IAlbumDetailPresenter {
     }
 
     @Override
-    public void unregisterViewCallback(IAlbumDetailViewCallback callback) {
+    public void unRegisterViewCallback(IAlbumDetailViewCallback callback) {
         if (mCallbacks != null) {
             mCallbacks.remove(callback);
         }

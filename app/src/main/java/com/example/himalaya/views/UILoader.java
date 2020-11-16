@@ -29,15 +29,15 @@ public abstract class UILoader extends FrameLayout {
     public UIState mCurrentStatus = UIState.NONE;
 
     public UILoader(@NonNull Context context) {
-        super(context, null);
+        this(context, null);
     }
 
     public UILoader(@NonNull Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs,0);
     }
 
     public UILoader(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, 0);
+        super(context, attrs, defStyleAttr);
 
         init();
     }

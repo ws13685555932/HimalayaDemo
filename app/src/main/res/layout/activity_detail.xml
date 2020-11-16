@@ -108,11 +108,12 @@
 
     </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/tv_detail_list"
-        android:overScrollMode="never"
+    <FrameLayout
+        android:id="@+id/fl_detail_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/rl_play_control" />
+
+
 
 </RelativeLayout>

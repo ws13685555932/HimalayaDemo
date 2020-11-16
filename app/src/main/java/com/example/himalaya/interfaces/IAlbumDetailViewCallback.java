@@ -10,4 +10,6 @@ public interface IAlbumDetailViewCallback {
     void onDetailListLoaded(List<Track> tracks);
 
     void onAlbumLoaded(Album album);
+
+    void onNetworkError(int errorCode, String errorMessage);
 }

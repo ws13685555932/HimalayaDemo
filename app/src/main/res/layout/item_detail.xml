@@ -10,7 +10,8 @@
         android:layout_centerVertical="true"
         android:layout_height="50dp"
         android:layout_width="50dp"
-        android:padding="15dp"
+        android:padding="5dp"
+        android:gravity="center"
         android:text="77"
         android:textSize="20sp" />
 

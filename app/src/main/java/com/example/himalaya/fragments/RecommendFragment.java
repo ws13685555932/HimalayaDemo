@@ -112,7 +112,7 @@ public class RecommendFragment extends BaseFragment implements IRecommendViewCal
     public void onDestroyView() {
         super.onDestroyView();
         if (mRecommendPresenter != null) {
-            mRecommendPresenter.unregisterViewCallback(this);
+            mRecommendPresenter.unRegisterViewCallback(this);
         }
     }
 

@@ -1,10 +1,8 @@
 package com.example.himalaya.interfaces;
 
-public interface IRecommendPresenter {
+import com.example.himalaya.base.IBasePresenter;
+
+public interface IRecommendPresenter extends IBasePresenter<IRecommendViewCallback> {
 
     void getRecommendList();
-
-    void registerViewCallback(IRecommendViewCallback callback);
-
-    void unregisterViewCallback(IRecommendViewCallback callback);
 }

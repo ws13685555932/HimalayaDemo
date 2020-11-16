@@ -20,6 +20,7 @@ public class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.In
     private List<Track> mDetailData = new ArrayList<>();
     private SimpleDateFormat mUpdateTimeFormat;
     private SimpleDateFormat mDurationFormat;
+    private ItemClickedListener mOnItemClickListener;
 
     public DetailListAdapter() {
         mUpdateTimeFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -35,8 +36,18 @@ public class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.In
     }
 
     @Override
-    public void onBindViewHolder(@NonNull InnerHolder holder, int position) {
+    public void onBindViewHolder(@NonNull InnerHolder holder, final int position) {
         holder.bindData(mDetailData.get(position), position);
+        final View itemView = holder.itemView;
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mOnItemClickListener != null) {
+                    // 需要有列表和位置
+                    mOnItemClickListener.onItemClick(position, mDetailData);
+                }
+            }
+        });
     }
 
     @Override
@@ -73,7 +84,7 @@ public class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.In
             TextView tvTrackDuration = itemView.findViewById(R.id.tv_track_duration);
             TextView tvUpdateTime = itemView.findViewById(R.id.tv_update_time);
 
-            tvItemId.setText(position + "");
+            tvItemId.setText((position+1) + "");
             tvTrackTitle.setText(track.getTrackTitle());
             tvTrackPlayCount.setText(track.getPlayCount() + "");
 
@@ -85,4 +96,13 @@ public class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.In
             tvUpdateTime.setText(updateTimeText);
         }
     }
+
+    public void setOnItemClickedListener(ItemClickedListener listener) {
+        this.mOnItemClickListener = listener;
+    }
+
+    public interface ItemClickedListener {
+        void onItemClick(int position, List<Track> detailData);
+    }
+
 }

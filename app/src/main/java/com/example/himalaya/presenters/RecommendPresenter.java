@@ -115,7 +115,7 @@ public class RecommendPresenter implements IRecommendPresenter {
     }
 
     @Override
-    public void unregisterViewCallback(IRecommendViewCallback callback) {
+    public void unRegisterViewCallback(IRecommendViewCallback callback) {
         if (mCallbacks != null) {
             mCallbacks.remove(callback);
         }
