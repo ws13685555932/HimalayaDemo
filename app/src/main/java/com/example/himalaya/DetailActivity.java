@@ -139,9 +139,9 @@ public class DetailActivity extends AppCompatActivity implements IAlbumDetailVie
 
     @Override
     public void onAlbumLoaded(Album album) {
-//        if (mUiLoader != null) {
-//            mUiLoader.updateStatus(UILoader.UIState.LOADING);
-//        }
+        if (mUiLoader != null) {
+            mUiLoader.updateStatus(UILoader.UIState.LOADING);
+        }
         // 获取专辑的详情内容
         mCurrentId = album.getId();
         if (mAlbumDetailPresenter != null) {

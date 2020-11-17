@@ -17,6 +17,9 @@ public interface IPlayerPresenter extends IBasePresenter<IPlayerViewCallback>{
 
     void switchPlayMode(XmPlayListControl.PlayMode mode);
 
+    /**
+     * 获取播放列表
+     */
     void getPlayList();
 
     /**
@@ -37,4 +40,5 @@ public interface IPlayerPresenter extends IBasePresenter<IPlayerViewCallback>{
      * @return 是否在播放
      */
     boolean isPlay();
+
 }

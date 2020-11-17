@@ -29,11 +29,16 @@ public interface IPlayerViewCallback {
 
     void onPlayModeChange(XmPlayListControl.PlayMode mode);
 
-    void onProgressChange(long currentProgress, long total);
+    void onProgressChange(int currentProgress, int total);
 
     void onAdLoading();
 
     void onAdFinished();
 
+    /**
+     * 更新当前节目信息
+     * @param track 节目信息
+     */
+    void onTrackUpdate(Track track);
 
 }
